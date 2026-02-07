@@ -26,9 +26,9 @@ Add these repository secrets:
 ## Workflows
 
 - `.github/workflows/tests.yml`: runs `pytest` on pushes to `main`
-- `.github/workflows/auto-fix.yml`: when tests fail, downloads the test log and runs the AI fixer to create a PR
+- `.github/workflows/auto-fix.yml`: when tests fail, uses the Codex GitHub Action to propose a fix and open a PR
 
 ## Notes
 
-The fixer script lives at `scripts/agent_fix.py`. It requests a unified diff from the model and applies it with `git apply`.
-If the patch applies cleanly, it commits the change and opens a pull request.
+The auto-fix workflow runs Codex directly in the repository and opens/updates a pull request.
+The model output is saved to `codex-output.md` and uploaded as a workflow artifact.
