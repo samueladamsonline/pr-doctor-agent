@@ -78,18 +78,22 @@ def main() -> int:
         return 1
 
     diff = response.output_text.strip()
+
+    patch_path = ROOT / "ai-fix.patch"
+    patch_path.write_text(diff, encoding="utf-8")
+
     if not diff.startswith("diff --git"):
         print("Model did not return a git diff.")
         print(diff)
         return 1
 
-    patch_path = ROOT / "ai-fix.patch"
-    patch_path.write_text(diff, encoding="utf-8")
-
     try:
         subprocess.run(["git", "apply", str(patch_path)], check=True)
     except subprocess.CalledProcessError:
         print("Failed to apply patch.")
+        print("Patch content with line numbers:")
+        for idx, line in enumerate(diff.splitlines(), start=1):
+            print(f"{idx:4d}: {line}")
         return 1
 
     return 0

@@ -41,6 +41,13 @@ jobs:
         run: |
           python scripts/agent_fix.py
 
+      - name: Upload ai-fix.patch
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-fix-patch
+          path: ai-fix.patch
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
         with:
