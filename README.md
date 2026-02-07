@@ -1,4 +1,4 @@
-# pr-doctor-agent
+# pr-fixer-example
 
 A tiny hello-world Python project with pytest and a GitHub Actions workflow that:
 
