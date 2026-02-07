@@ -58,4 +58,5 @@ jobs:
           title: "Fix failing tests"
           body: "Automated fix based on failing test output."
           branch: "codex/auto-fix"
+          base: main
           commit-message: "Fix failing tests"
